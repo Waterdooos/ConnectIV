@@ -1,2 +1,2 @@
 # ConnectIV
-ConnectIV implementatin for web technology course
+ConnectIV implementation for web technology course
