@@ -11,7 +11,7 @@ const Game = require("./models/game");
 const router = require('./routes/router');
 
 if (process.argv.length < 3) {
-  console.log("Error: expected a port as argument (eg. 'node app.js 3000').");
+  console.log("You need to provide a port number as an argument");
   process.exit(1);
 }
 const port = process.argv[2];

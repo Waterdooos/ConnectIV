@@ -1,8 +1,82 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap');
+
+:root {
+  --game-blue: #00A6D6;
+  --game-grey: #222629;
 }
 
-a {
-  color: #00B7FF;
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--game-grey);
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+main.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 750px;
+}
+
+.wrapper img {
+  max-width: 500px;
+  height: auto;
+}
+
+.wrapper p {
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Roboto;
+  color: white;
+  text-align: center;
+}
+
+.wrapper td {
+  font-size: 15px;
+  font-family: Roboto;
+  color: white;
+}
+
+.wrapper td.analytic {
+  color: var(--game-blue);
+  text-align: right;
+  padding-right: 10px;
+}
+.wrapper td.value {
+  padding-left: 10px;
+}
+
+button {
+  text-transform: uppercase;
+  background-color: var(--game-blue);
+  outline: 0;
+  border: 0;
+  margin-top: 20px;
+  padding: 20px 40px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Roboto;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: color .3s, background-color .3s;
+}
+
+button:hover {
+  color: var(--game-blue);
+  background-color: white;
+}
+
+button:active {
+  transition: color .1s;
+  color: var(--game-gray)
 }
