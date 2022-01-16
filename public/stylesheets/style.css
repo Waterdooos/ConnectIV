@@ -34,12 +34,19 @@ body {
   content: "Game made by Joris Belder & Hanna Heinczinger";
   font-size: 12px;
   font-family: Roboto;
-  white-space: nowrap;
+  width: fit-content;
+  white-space: pre;
   text-align: left;
   position: absolute;
   top: 100%;
   left: 0;
   color: white
+}
+
+@media only screen and (max-height: 900px) {
+  .info:hover::after {
+    content: "Game made by Joris Belder & Hanna Heinczinger\AIt is preferable to use a screenheight greater than 900px";
+  }
 }
 
 main.wrapper {
