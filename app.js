@@ -49,6 +49,8 @@ wss.on("connection", function connection(socket) {
   } else {
     game.bluePlayer = con;
     game.hasStarted = true;
+    game.turn = Constants.startingPlayer === Constants.colorA ? game.whitePlayer : game.bluePlayer;
+    broadcast(game, JSON.stringify(Messages.MSG_START_GAME));
     game = new Game(statTracker.gamesInitialized++);
   }
 
@@ -63,6 +65,7 @@ wss.on("connection", function connection(socket) {
     if (msg.type === Messages.TYPE_DROP_DISK && currentGame.hasStarted) {
       const column = msg.data;
       const color = isWhitePlayer ? Constants.colorA : Constants.colorB;
+      if (currentGame.turn !== con) return con.send(constructMsg(Messages.MSG_ERROR, "Not your turn"));
       try {
         var disk = currentGame.board.addDisk(column, color);
       } catch (e) {
@@ -70,6 +73,8 @@ wss.on("connection", function connection(socket) {
       }
 
       broadcast(currentGame, constructMsg(Messages.MSG_UPDATE_BOARD, currentGame.board.cells));
+
+      currentGame.turn = isWhitePlayer ? currentGame.bluePlayer : currentGame.whitePlayer;
 
       const winCondition = currentGame.board.checkWinCondition(disk);
       switch(winCondition) {

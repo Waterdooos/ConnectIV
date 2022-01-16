@@ -147,9 +147,22 @@ aside p {
 .column {
   display: flex;
   flex-direction: column;
+  transition: background-color .2s;
+}
+
+.column:hover {
+  background-color: rgba(255,255,255,20%);
 }
 
 .holedSquare {
   width: 100px;
   height: 100px;
+  position: relative;
+}
+
+.holedSquare .whiteDisk, .holedSquare .blueDisk {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

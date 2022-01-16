@@ -24,5 +24,5 @@ ConnectIV implementation for web technology course
 * Show screen that you are looking for a game
 * Statistics need to be updated and shown
 * If a player drops out, the game is aborted
-* Turn by turn gameplay
+* ~~Turn by turn gameplay~~
 * Maybe add debounce on user input

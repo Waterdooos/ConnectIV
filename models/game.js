@@ -7,6 +7,7 @@ class Game {
     this.whitePlayer = null;
     this.bluePlayer = null;
     this.hasStarted = false;
+    this.turn = null;
   }
 }
 
