@@ -6,10 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Connect IV</title>
   <link rel="stylesheet" href="stylesheets/style.css">
+  <link rel="stylesheet" href="stylesheets/game.css">
 </head>
 <body>
+  <div class="overlay">
+    <div class="messageBox growAndShrink">
+      <p class="message">Looking for a game...</p>
+    </div>
+  </div>
   <main class="wrapper">
     <img src="images/Logo.png" alt="">
+    <span class="info">&#9432;</span>
     <div class="container">
       <aside class="player1">
         <p>Player 1</p>
@@ -19,8 +26,8 @@
         </div>
       </aside>
       <div class="board">
-        <div class="lefSide"></div>
-        <div class="mainBoard">
+        <div class="leftSide"></div>
+        <div class="mainBoard" data-seconds-passed="00" data-minutes-passed="0">
           <div class="column">
             <div class="holedSquare"></div>
             <div class="holedSquare"></div>

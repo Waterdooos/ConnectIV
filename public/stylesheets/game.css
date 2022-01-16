@@ -1,0 +1,253 @@
+@media only screen and (max-height: 900px) {
+  main.wrapper {
+    transform: scale(.8);
+    min-height: 100vh;
+  }
+}
+
+.whiteDisk {
+  border: 5px solid var(--game-blue);
+  background-color: white;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: inset 0px 0px 20px rgba(0,0,0,50%);
+}
+
+.blueDisk {
+  border: 5px solid white;
+  background-color: var(--game-blue);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: inset 0px 0px 20px rgba(0,0,0,50%);
+}
+
+.whiteDisk img, .blueDisk img {
+  transform-origin: center;
+  transform: translate(-50%, -50%) rotateZ(-15deg);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.overlay {
+  position: fixed;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,30%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity .5s;
+}
+
+.overlay.hide {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.messageBox {
+  padding: 50px 50px;
+  max-width: 500px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.message {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+  font-family: Roboto;
+  color: var(--game-blue);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+aside {
+  cursor: pointer;
+  position: relative;
+}
+
+.player1::before, .player2::before {
+  content: attr(data-time-taken) " seconds";
+  position: absolute;
+  top: -20px;
+  opacity: .3;
+  color: white;
+  font-size: 12px;
+  font-family: Roboto;
+  transition: opacity .3s;
+}
+
+.player1::before {
+  right: 0px;
+}
+
+.player2::before {
+  left: 0px;
+}
+
+.player1:hover::before {
+  opacity: 1;
+}
+
+.player2:hover::before {
+  opacity: 1;
+}
+
+aside p {
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.player1 p {
+  text-align: right;
+}
+
+.player2 p {
+  text-align: left;
+  color: var(--game-blue);
+}
+
+.player1 .whiteDisk {
+  float: right;
+  margin-top: 10px;
+}
+
+.player2 .blueDisk {
+  float: left;
+  margin-top: 10px;
+}
+
+.mainBoard, .board {
+  display: flex;
+}
+
+.mainBoard::after {
+  content: attr(data-minutes-passed) " : " attr(data-seconds-passed);
+  color: white;
+  font-size: 20px;
+  font-family: Roboto;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  transition: background-color .2s;
+  z-index: 0;
+}
+
+.mainBoard.active .column {
+  cursor: pointer;
+}
+
+.mainBoard.active .column:hover {
+  background-color: rgba(255,255,255,20%);
+}
+
+.holedSquare {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  background-image: radial-gradient(transparent 65%, white 65% 100%);
+}
+
+.leftSide {
+  border-radius: 20px 0 0 0;
+}
+
+.rightSide {
+  border-radius: 0 20px 0 0;
+}
+
+.leftSide, .rightSide {
+  width: 50px;
+  background-color: white;
+}
+
+.board {
+  border-bottom: 50px solid var(--game-blue);
+  margin: 20px 30px 0px 30px;
+}
+
+.holedSquare .whiteDisk, .holedSquare .blueDisk {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+/* Animations on game screen */
+.animation {
+  animation-name: fallingAnimation;
+  animation-duration: .8s;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
+}
+
+@keyframes fallingAnimation {
+  0% {
+    transform: translate3d(-50%, -100vh, 0);
+  }
+  80% {
+    transform: translate3d(-50%, -40%, 0);
+    animation-timing-function: ease-in-out;
+  }
+  90% {
+    transform: translate3d(-50%, -75%, 0);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0);
+    animation-timing-function: ease-in-out;
+  }
+}
+
+.growAndShrink {
+  animation-name: growAndShrink;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes growAndShrink {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+  }
+}
+
+.activePlayer {
+  animation-name: brightenAndDarken;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  transition: filter .1s;
+}
+
+@keyframes brightenAndDarken {
+  from {
+    filter: brightness(.9);
+  }
+  to {
+    filter: brightness(1.1);
+  }
+}

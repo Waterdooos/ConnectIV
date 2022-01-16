@@ -18,8 +18,10 @@
    * @param {any} data 
    * @returns JSONified message with data
    */
-  function constructMsg(msg, data) {
-    msg.data = data;
+  function constructMsg(msg, data = null) {
+    if (msg?.data !== void 0) { // if data attribute exists
+      msg.data = data;
+    }
     return JSON.stringify(msg, (key, value) => {
       if (key === "neighbours") return undefined;
       return value;

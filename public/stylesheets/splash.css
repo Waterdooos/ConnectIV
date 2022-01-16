@@ -1,0 +1,78 @@
+@media only screen and (max-width: 600px) {
+  main.wrapper > p {
+    font-size: 15px;
+  }
+}
+
+/*Animation on splash screen*/
+.wrapper > img {
+  animation-name: fallingAnimation;
+  animation-duration: .8s;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
+  animation-delay: .8s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+@keyframes fallingAnimation {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(10%);
+    animation-timing-function: ease-in-out;
+  }
+  90% {
+    transform: translateY(-25%);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translateY(0);
+    animation-timing-function: ease-in-out;
+    opacity: 1
+  }
+}
+
+.wrapper td {
+  font-size: 15px;
+  font-family: Roboto;
+  color: white;
+}
+
+.wrapper td.analytic {
+  color: var(--game-blue);
+  text-align: right;
+  padding-right: 10px;
+}
+.wrapper td.value {
+  padding-left: 10px;
+}
+
+button {
+  text-transform: uppercase;
+  background-color: var(--game-blue);
+  outline: 0;
+  border: 0;
+  margin-top: 20px;
+  padding: 20px 40px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Roboto;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: color .3s, background-color .3s;
+}
+
+button:hover {
+  color: var(--game-blue);
+  background-color: white;
+}
+
+button:active {
+  transition: color .1s;
+  color: var(--game-gray)
+}
