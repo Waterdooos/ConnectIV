@@ -13,3 +13,16 @@ ConnectIV implementation for web technology course
 * Show countdown timer, if move takes too long
 * Disk falling animation
 * Column highlighting
+
+# TODO
+* Styling
+* Animations
+* Sensory feedback (column highlighting and such)
+* Win/lose/draw screen
+* Show time since game has started
+* Show countdown timer if move takes too long
+* Show screen that you are looking for a game
+* Statistics need to be updated and shown
+* If a player drops out, the game is aborted
+* Turn by turn gameplay
+* Maybe add debounce on user input

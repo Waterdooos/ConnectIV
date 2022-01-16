@@ -1,4 +1,3 @@
-const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
@@ -7,6 +6,10 @@ const websocket = require("ws");
 
 const statTracker = require("./models/statTracker");
 const Game = require("./models/game");
+
+const Messages = require("./public/javascripts/messages");
+const Constants = require("./public/javascripts/constants");
+const { broadcast, constructMsg } = require("./public/javascripts/util");
 
 const router = require('./routes/router');
 
@@ -33,13 +36,59 @@ const server = http.createServer(app);
 const wss = new websocket.Server({ server });
 const sockets = {};
 
-let game = new Game();
+let game = new Game(statTracker.gamesInitialized++);
 let conId = 0;
 
 wss.on("connection", function connection(socket) {
   const con = socket;
   con.id = conId++;
   sockets[con.id] = game;
+  
+  if (!game.whitePlayer) {
+    game.whitePlayer = con;
+  } else {
+    game.bluePlayer = con;
+    game.hasStarted = true;
+    game = new Game(statTracker.gamesInitialized++);
+  }
+
+  console.log(sockets);
+
+  con.on("message", function(jsonmsg) {
+    const msg = JSON.parse(jsonmsg);
+
+    const currentGame = sockets[con.id];
+    const isWhitePlayer = currentGame.whitePlayer === con ? true : false;
+
+    if (msg.type === Messages.TYPE_DROP_DISK && currentGame.hasStarted) {
+      const column = msg.data;
+      const color = isWhitePlayer ? Constants.colorA : Constants.colorB;
+      try {
+        var disk = currentGame.board.addDisk(column, color);
+      } catch (e) {
+        return con.send(constructMsg(Messages.MSG_ERROR, e));
+      }
+
+      broadcast(currentGame, constructMsg(Messages.MSG_UPDATE_BOARD, currentGame.board.cells));
+
+      const winCondition = currentGame.board.checkWinCondition(disk);
+      switch(winCondition) {
+        case Constants.colorA:
+          console.log(`${Constants.colorA} won`);
+          break;
+        case Constants.colorB:
+          console.log(`${Constants.colorB} won`);
+          break;
+        case Constants.draw:
+          console.log("It\'s a draw");
+          break;
+      }
+    }
+  });
+
+  con.on("close", function(code) {
+
+  });
 })
 
 server.listen(port);

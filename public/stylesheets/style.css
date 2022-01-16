@@ -26,8 +26,8 @@ main.wrapper {
   max-width: 750px;
 }
 
-.wrapper img {
-  max-width: 500px;
+.wrapper > img {
+  max-width: 450px;
   height: auto;
 }
 
@@ -79,4 +79,77 @@ button:hover {
 button:active {
   transition: color .1s;
   color: var(--game-gray)
+}
+
+.whiteDisk {
+  border: 5px solid var(--game-blue);
+  background-color: white;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: inset 0px 0px 20px rgba(0,0,0,50%);
+}
+
+.blueDisk {
+  border: 5px solid white;
+  background-color: var(--game-blue);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: relative;
+  box-shadow: inset 0px 0px 20px rgba(0,0,0,50%);
+}
+
+.whiteDisk img, .blueDisk img {
+  transform-origin: center;
+  transform: translate(-50%, -50%) rotateZ(-15deg);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+aside p {
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.player1 p {
+  text-align: right;
+}
+
+.player2 p {
+  text-align: left;
+  color: var(--game-blue);
+}
+
+.player1 .whiteDisk {
+  float: right;
+  margin-top: 10px;
+}
+
+.player2 .blueDisk {
+  float: left;
+  margin-top: 10px;
+}
+
+.mainBoard, .board {
+  display: flex;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.holedSquare {
+  width: 100px;
+  height: 100px;
 }
